@@ -66,6 +66,11 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y php5-cli git
+    sudo apt-get install -y php5-cli git default-jre
+    curl -OL https://getcomposer.org/installer
+    php installer
+    sudo mv composer.phar /usr/local/bin/composer
+    git clone https://github.com/lsulibraries/mik.git /vagrant/mik
+    cd /vagrant/mik && composer install
   SHELL
 end
