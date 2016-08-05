@@ -16,8 +16,9 @@ Vagrant.configure(2) do |config|
   config.vm.post_up_message = "vagrant ssh
 cd /vagrant/mik
 php mik --config=extras/lsu/configuration_files/$alias_simple.ini
-php mik --config=extras/lsu/configuration_files/$alias_compounnd.ini"
-
+php mik --config=extras/lsu/configuration_files/$alias_compounnd.ini
+python3 post_mik.py $alias
+then spotcheck or debug, and send to Islandora"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
