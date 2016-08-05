@@ -15,7 +15,9 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.post_up_message = "vagrant ssh
 cd /vagrant/mik
-./mik --config=extras/lsu/configuration_files/LSU_JJA.ini --limit=2"
+php mik --config=extras/lsu/configuration_files/$alias_simple.ini
+php mik --config=extras/lsu/configuration_files/$alias_compounnd.ini"
+
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -50,7 +52,7 @@ cd /vagrant/mik
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
-  #   # Customize the amount of memory on the VM:
+    # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
   # end
   #
@@ -69,11 +71,11 @@ cd /vagrant/mik
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y php5-cli git default-jre
-    curl -OL https://getcomposer.org/installer
-    php installer
-    sudo mv composer.phar /usr/local/bin/composer
-    git clone https://github.com/lsulibraries/mik.git /vagrant/mik
-    cd /vagrant/mik && composer install
+    sudo apt-get install -y libxml2-dev libxslt1-dev python-dev lib32z1-dev python3-lxml php5-cli git default-jre
+    # curl -OL https://getcomposer.org/installer
+    # php installer
+    # sudo mv composer.phar /usr/local/bin/composer
+    # git clone https://github.com/lsulibraries/mik.git /vagrant/mik
+    # cd /vagrant/mik && composer install
   SHELL
 end
