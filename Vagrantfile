@@ -15,6 +15,8 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.post_up_message = "vagrant ssh
 cd /vagrant/mik
+mkdir /vagrant/mik/output  # if there's not an output folder yet
+mkdir /vagrant/mik/Cached_Cdm_files  # if there's not that one
 php mik --config=extras/lsu/configuration_files/$alias_simple.ini
 php mik --config=extras/lsu/configuration_files/$alias_compounnd.ini
 python3 post_mik.py $alias
@@ -50,22 +52,13 @@ then spotcheck or debug, and send to Islandora"
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-    # Customize the amount of memory on the VM:
     vb.memory = "4096"
   end
+
   #
   # View the documentation for the provider you are using for more
   # information on available options.
 
-  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-  # such as FTP and Heroku are also available. See the documentation at
-  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
-  # config.push.define "atlas" do |push|
-  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
-  # end
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
@@ -73,10 +66,10 @@ then spotcheck or debug, and send to Islandora"
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
     sudo apt-get install -y libxml2-dev libxslt1-dev python-dev lib32z1-dev python3-lxml php5-cli git default-jre
-    # curl -OL https://getcomposer.org/installer
-    # php installer
-    # sudo mv composer.phar /usr/local/bin/composer
-    # git clone https://github.com/lsulibraries/mik.git /vagrant/mik
-    # cd /vagrant/mik && composer install
+    curl -OL https://getcomposer.org/installer
+    php installer
+    sudo mv composer.phar /usr/local/bin/composer
+    git clone https://github.com/lsulibraries/mik.git /vagrant/mik
+    cd /vagrant/mik && composer install
   SHELL
 end
